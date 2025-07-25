@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お誕生日おめでとうございます</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Бесшовный премиум фон */
+        .premium-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        }
+
+        .gold-particle {
+            position: absolute;
+            background: radial-gradient(circle, #ffd700, transparent);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float var(--duration, 8s) infinite ease-in-out;
+        }
+
+        .luxury-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            height: 1px;
+            opacity: 0.2;
+            animation: slide var(--duration, 10s) infinite linear;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.1; }
+            25% { transform: translateY(-30px) translateX(20px); opacity: 0.3; }
+            50% { transform: translateY(-15px) translateX(-15px); opacity: 0.2; }
+            75% { transform: translateY(-45px) translateX(10px); opacity: 0.4; }
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Основной контент */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Приветственный раздел */
+        .welcome-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .welcome-text {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 60px;
+            border-radius: 30px;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.5),
+                inset 0 0 100px rgba(255, 215, 0, 0.1);
+            max-width: 900px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 2.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-text::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 4s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            font-weight: 400;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .birthday-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 30px 0;
+            text-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+            background: linear-gradient(45deg, #ffd700, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .birthday-text::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+
+        .message {
+            font-size: 1.4rem;
+            line-height: 2;
+            margin: 40px 0;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 300;
+        }
+
+        .friend-name {
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 1.8rem;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Фото раздел */
+        .photos-section {
+            padding: 100px 20px;
+            min-height: 300vh;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 3.5rem;
+            color: #ffd700;
+            margin-bottom: 100px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            font-weight: 400;
+            position: relative;
+            z-index: 100;
+            background: rgba(15, 12, 41, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+
+        .photo-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .photo-wrapper {
+            position: relative;
+            width: 500px;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .photo {
+            position: absolute;
+            width: 450px;
+            height: 550px;
+            object-fit: cover;
+            border: 15px solid #fff;
+            border-radius: 25px;
+            box-shadow: 
+                0 40px 80px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(255, 215, 0, 0.3);
+            opacity: 0;
+            transform: scale(0.7) rotate(var(--rotate, 0deg)) translate(var(--start-x, 0px), var(--start-y, 100px));
+            transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: var(--z-index, 1);
+            filter: brightness(0.8) saturate(1.2);
+        }
+
+        .photo.revealed {
+            opacity: 1;
+            transform: scale(1) rotate(var(--rotate, 0deg)) translate(var(--target-x, 0px), var(--target-y, 0px));
+            filter: brightness(1) saturate(1);
+        }
+
+        /* Финальный раздел */
+        .final-section {
+            padding: 200px 20px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .final-message {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: #ffd700;
+            margin-bottom: 60px;
+            text-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+            animation: pulse 3s infinite;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .signature {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-top: 40px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 300;
+        }
+
+        .heart {
+            color: #ff6b6b;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .date {
+            font-size: 1.4rem;
+            color: #aaa;
+            margin-top: 20px;
+            font-weight: 300;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+            }
+            50% { 
+                transform: scale(1.05);
+                text-shadow: 0 0 80px rgba(255, 215, 0, 1);
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Модальное окно для фото */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border: 5px solid #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 100px rgba(255, 215, 0, 0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 3rem;
+            color: #fff;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2001;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 215, 0, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .birthday-text {
+                font-size: 5rem;
+            }
+
+            .message {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+
+            .friend-name {
+                font-size: 1.4rem;
+            }
+
+            .photo-wrapper {
+                width: 350px;
+                height: 450px;
+            }
+
+            .photo {
+                width: 320px;
+                height: 400px;
+                border-width: 10px;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .final-message {
+                font-size: 2.5rem;
+            }
+            
+            .photo-container {
+                margin-bottom: 30px;
+            }
+            
+            .signature {
+                font-size: 1.5rem;
+            }
+            
+            .date {
+                font-size: 1.1rem;
+            }
+            
+            .close-modal {
+                top: 20px;
+                right: 20px;
+                font-size: 2rem;
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.5rem;
+                white-space: normal;
+            }
+
+            .birthday-text {
+                font-size: 3.5rem;
+            }
+
+            .welcome-text {
+                padding: 30px 20px;
+            }
+
+            .photo-wrapper {
+                width: 280px;
+                height: 380px;
+            }
+
+            .photo {
+                width: 260px;
+                height: 340px;
+                border-width: 8px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                white-space: normal;
+                padding: 15px;
+            }
+
+            .final-message {
+                font-size: 2rem;
+            }
+            
+            .photo-container {
+                margin-bottom: 20px;
+            }
+            
+            .signature {
+                font-size: 1.3rem;
+            }
+            
+            .date {
+                font-size: 1rem;
+            }
+            
+            .close-modal {
+                top: 15px;
+                right: 15px;
+                font-size: 1.5rem;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Бесшовный премиум фон -->
+    <div class="premium-background" id="premiumBackground"></div>
+
+    <!-- Модальное окно для фото -->
+    <div class="modal" id="photoModal">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- Основной контент -->
+    <div class="container">
+        <!-- Приветственный раздел -->
+        <section class="welcome-section">
+            <div class="welcome-text">
+                <h1 class="main-title">🌟 ご誕生日おめでとうございます 🌟</h1>
+                <div class="birthday-text">55</div>
+                <p class="message">
+                    本日は<span class="friend-name">あなたの特別なご誕生日</span>です。<br><br>
+                    55年の人生という長きにわたり、<br>
+                    あなたは多くの人々の心に<br>
+                    深く美しい思い出を刻まれてきました。<br><br>
+                    あなたの温かさ、深い知恵、そして<br>
+                    穏やかな笑顔は、周りの人々を<br>
+                    常に幸せと感動で包んでいます。<br><br>
+                    これからも健康で、ますます<br>
+                    輝かしい日々が続きますように<br>
+                    心よりお祈り申し上げます。
+                </p>
+                <p class="message">
+                    <span class="friend-name">ご誕生日おめでとうございます！</span><br>
+                    そして、これからもどうぞよろしくお願いいたします。
+                </p>
+            </div>
+        </section>
+
+        <!-- Фото раздел -->
+        <section class="photos-section">
+            <h2 class="section-title">📸 笑顔の瞬間 📸</h2>
+            
+            <!-- Первое фото -->
+            <div class="photo-container" id="photoContainer1">
+                <div class="photo-wrapper">
+                    <img class="photo" src="https://placehold.co/450x550/ffd700/000000?text=思い出+1" alt="思い出1" data-index="1">
+                </div>
+            </div>
+            
+            <!-- Второе фото -->
+            <div class="photo-container" id="photoContainer2">
+                <div class="photo-wrapper">
+                    <img class="photo" src="https://placehold.co/450x550/ff6b6b/ffffff?text=思い出+2" alt="思い出2" data-index="2">
+                </div>
+            </div>
+            
+            <!-- Третье фото -->
+            <div class="photo-container" id="photoContainer3">
+                <div class="photo-wrapper">
+                    <img class="photo" src="https://placehold.co/450x550/4ecdc4/000000?text=思い出+3" alt="思い出3" data-index="3">
+                </div>
+            </div>
+            
+            <!-- Четвертое фото -->
+            <div class="photo-container" id="photoContainer4">
+                <div class="photo-wrapper">
+                    <img class="photo" src="https://placehold.co/450x550/45b7d1/ffffff?text=思い出+4" alt="思い出4" data-index="4">
+                </div>
+            </div>
+            
+            <!-- Пятое фото -->
+            <div class="photo-container" id="photoContainer5">
+                <div class="photo-wrapper">
+                    <img class="photo" src="https://placehold.co/450x550/96ceb4/000000?text=思い出+5" alt="思い出5" data-index="5">
+                </div>
+            </div>
+            
+            <!-- Шестое фото -->
+            <div class="photo-container" id="photoContainer6">
+                <div class="photo-wrapper">
+                    <img class="photo" src="https://placehold.co/450x550/ff9ff3/000000?text=思い出+6" alt="思い出6" data-index="6">
+                </div>
+            </div>
+            
+            <!-- Седьмое фото -->
+            <div class="photo-container" id="photoContainer7">
+                <div class="photo-wrapper">
+                    <img class="photo" src="https://placehold.co/450x550/54a0ff/ffffff?text=思い出+7" alt="思い出7" data-index="7">
+                </div>
+            </div>
+            
+            <!-- Восьмое фото -->
+            <div class="photo-container" id="photoContainer8">
+                <div class="photo-wrapper">
+                    <img class="photo" src="https://placehold.co/450x550/5f27cd/ffffff?text=思い出+8" alt="思い出8" data-index="8">
+                </div>
+            </div>
+            
+            <!-- Девятое фото -->
+            <div class="photo-container" id="photoContainer9">
+                <div class="photo-wrapper">
+                    <img class="photo" src="https://placehold.co/450x550/00d2d3/000000?text=思い出+9" alt="思い出9" data-index="9">
+                </div>
+            </div>
+            
+            <!-- Десятое фото -->
+            <div class="photo-container" id="photoContainer10">
+                <div class="photo-wrapper">
+                    <img class="photo" src="https://placehold.co/450x550/ff9f43/000000?text=思い出+10" alt="思い出10" data-index="10">
+                </div>
+            </div>
+        </section>
+
+        <!-- Финальный раздел -->
+        <section class="final-section">
+            <div class="final-message">🎉 ご誕生日おめでとうございます！ 🎉</div>
+            <div class="signature">あなたの<span class="heart">❤️</span>友達パベルより</div>
+            <div class="date">東京、七月２０２５</div>
+        </section>
+    </div>
+
+    <script>
+        // Создание премиум фоновых элементов
+        function createPremiumBackground() {
+            const container = document.getElementById('premiumBackground');
+            
+            // Создание золотых частиц с уменьшенным радиусом
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'gold-particle';
+                
+                const size = Math.random() * 80 + 30; // Уменьшенный размер
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 10;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}%`;
+                particle.style.top = `${top}%`;
+                particle.style.setProperty('--duration', `${duration}s`);
+                particle.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(particle);
+            }
+            
+            // Создание линий роскоши
+            for (let i = 0; i < 20; i++) {
+                const line = document.createElement('div');
+                line.className = 'luxury-line';
+                
+                const width = Math.random() * 400 + 300;
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const duration = Math.random() * 25 + 15;
+                const delay = Math.random() * 15;
+                
+                line.style.width = `${width}px`;
+                line.style.left = `${left}%`;
+                line.style.top = `${top}%`;
+                line.style.setProperty('--duration', `${duration}s`);
+                line.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(line);
+            }
+        }
+
+        // Система появления фото с правильным поведением
+        function initPhotoRevealSystem() {
+            const photoContainers = document.querySelectorAll('.photo-container');
+            
+            // Настройка начальных позиций и вращений для каждого фото
+            photoContainers.forEach((container, index) => {
+                const photo = container.querySelector('.photo');
+                const rotate = (Math.random() - 0.5) * 40;
+                const startX = (Math.random() - 0.5) * 400;
+                const startY = 100;
+                const targetX = (Math.random() - 0.5) * 50;
+                const targetY = 0;
+                
+                photo.style.setProperty('--rotate', `${rotate}deg`);
+                photo.style.setProperty('--start-x', `${startX}px`);
+                photo.style.setProperty('--start-y', `${startY}px`);
+                photo.style.setProperty('--target-x', `${targetX}px`);
+                photo.style.setProperty('--target-y', `${targetY}px`);
+                photo.style.setProperty('--z-index', 10 + index);
+            });
+
+            // Функция для обновления видимости фото
+            function updatePhotoReveal() {
+                photoContainers.forEach((container, index) => {
+                    const photo = container.querySelector('.photo');
+                    const containerRect = container.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    
+                    // Проверяем, находится ли контейнер в видимой области
+                    if (containerRect.top < windowHeight * 0.7 && containerRect.bottom > 0) {
+                        if (!photo.classList.contains('revealed')) {
+                            // Анимация появления с уменьшенной задержкой
+                            setTimeout(() => {
+                                photo.classList.add('revealed');
+                            }, index * 40);
+                        }
+                    } else {
+                        // Скрываем фото если оно ушло из видимой области
+                        if (photo.classList.contains('revealed')) {
+                            photo.classList.remove('revealed');
+                        }
+                    }
+                });
+            }
+
+            // Слушатель скролла с оптимизацией
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        updatePhotoReveal();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // Инициальная проверка
+            updatePhotoReveal();
+        }
+
+        // Система модального окна для фото
+        function initPhotoModal() {
+            const modal = document.getElementById('photoModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeModal = document.getElementById('closeModal');
+            const photos = document.querySelectorAll('.photo');
+            
+            // Добавляем обработчики клика на каждое фото
+            photos.forEach(photo => {
+                photo.addEventListener('click', function() {
+                    modal.style.display = 'block';
+                    modalImage.src = this.src;
+                    modalImage.alt = this.alt;
+                });
+            });
+            
+            // Закрытие модального окна
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Закрытие по клику вне фото
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Закрытие по клавише Escape
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && modal.style.display === 'block') {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Инициализация всех функций
+        document.addEventListener('DOMContentLoaded', () => {
+            createPremiumBackground();
+            initPhotoRevealSystem();
+            initPhotoModal();
+        });
+    </script>
+</body>
+</html>
